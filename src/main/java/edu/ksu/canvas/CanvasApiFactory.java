@@ -2,6 +2,7 @@ package edu.ksu.canvas;
 
 import edu.ksu.canvas.impl.*;
 import edu.ksu.canvas.interfaces.*;
+import edu.ksu.canvas.model.GroupCategory;
 import edu.ksu.canvas.net.RestClient;
 import edu.ksu.canvas.net.RefreshingRestClient;
 import edu.ksu.canvas.oauth.OauthToken;
@@ -168,6 +169,9 @@ public class CanvasApiFactory {
         readerMap.put(RoleReader.class, RoleImpl.class);
         readerMap.put(ExternalToolReader.class, ExternalToolImpl.class);
         readerMap.put(LoginReader.class, LoginImpl.class);
+        readerMap.put(GroupReader.class, GroupImpl.class);
+        readerMap.put(GroupMembershipReader.class, GroupMembershipImpl.class);
+        readerMap.put(GroupCategoryReader.class, GroupCategoryImpl.class);
 
         writerMap.put(AssignmentOverrideWriter.class, AssignmentOverrideImpl.class);
         writerMap.put(AdminWriter.class, AdminImpl.class);
@@ -188,5 +192,8 @@ public class CanvasApiFactory {
         writerMap.put(RoleWriter.class, RoleImpl.class);
         writerMap.put(ExternalToolWriter.class, ExternalToolImpl.class);
         writerMap.put(LoginWriter.class, LoginImpl.class);
+        writerMap.put(GroupWriter.class, GroupImpl.class);
+        writerMap.put(GroupMembershipWriter.class, GroupMembershipImpl.class);
+        writerMap.put(GroupCategoryWriter.class, GroupCategoryImpl.class);
     }
 }
