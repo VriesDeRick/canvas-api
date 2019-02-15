@@ -3,15 +3,16 @@ package edu.ksu.canvas.impl;
 import com.google.gson.reflect.TypeToken;
 import edu.ksu.canvas.interfaces.GroupMembershipReader;
 import edu.ksu.canvas.interfaces.GroupMembershipWriter;
+import edu.ksu.canvas.model.Group;
 import edu.ksu.canvas.model.GroupMembership;
+import edu.ksu.canvas.net.Response;
 import edu.ksu.canvas.net.RestClient;
 import edu.ksu.canvas.oauth.OauthToken;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class GroupMembershipImpl extends BaseImpl<GroupMembership, GroupMembershipReader, GroupMembershipWriter> implements GroupMembershipReader, GroupMembershipWriter {
     private static final Logger LOG = Logger.getLogger(GroupMembershipImpl.class);
@@ -47,5 +48,16 @@ public class GroupMembershipImpl extends BaseImpl<GroupMembership, GroupMembersh
     @Override
     protected Class<GroupMembership> objectType() {
         return GroupMembership.class;
+    }
+
+    @Override
+    public Optional<GroupMembership> createMembership(Integer groupId, Integer userId) throws IOException {
+        String url = buildCanvasUrl("groups/" + groupId + "/memberships", Collections.emptyMap());
+        Map<String, List<String>> params = new HashMap<>();
+        LinkedList<String> values = new LinkedList<>();
+        values.add(userId.toString());
+        params.put("user_id", values);
+        Response response = canvasMessenger.sendToCanvas(oauthToken, url, params);
+        return responseParser.parseToObject(GroupMembership.class, response);
     }
 }

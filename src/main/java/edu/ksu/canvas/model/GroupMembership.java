@@ -1,8 +1,11 @@
 package edu.ksu.canvas.model;
 
 import com.google.gson.annotations.SerializedName;
+import edu.ksu.canvas.annotation.CanvasField;
 
-public class GroupMembership {
+import java.io.Serializable;
+
+public class GroupMembership extends BaseCanvasModel implements Serializable {
 
     @SerializedName("id")
     private Integer membershipId;
@@ -29,6 +32,7 @@ public class GroupMembership {
         this.groupId = groupId;
     }
 
+    @CanvasField(postKey = "user_id")
     public Integer getUserId() {
         return userId;
     }
