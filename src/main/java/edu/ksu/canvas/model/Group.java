@@ -1,12 +1,17 @@
 package edu.ksu.canvas.model;
 
 import com.google.gson.annotations.SerializedName;
+import edu.ksu.canvas.annotation.CanvasField;
+import edu.ksu.canvas.annotation.CanvasObject;
 
-public class Group {
+import java.io.Serializable;
+
+public class Group extends BaseCanvasModel implements Serializable {
 
     @SerializedName("id")
     private Integer groupId;
     private String name;
+    private String description;
     private boolean isPublic;
     private boolean followedByUser;
     private String joinLevel;
@@ -28,6 +33,7 @@ public class Group {
         this.groupId = groupId;
     }
 
+    @CanvasField(postKey = "name", array = false)
     public String getName() {
         return name;
     }
@@ -36,6 +42,7 @@ public class Group {
         this.name = name;
     }
 
+    @CanvasField(postKey = "is_public", array = false)
     public boolean isPublic() {
         return isPublic;
     }
@@ -52,6 +59,7 @@ public class Group {
         this.followedByUser = followedByUser;
     }
 
+    @CanvasField(postKey = "join_level", array = false)
     public String getJoinLevel() {
         return joinLevel;
     }
@@ -108,6 +116,7 @@ public class Group {
         this.groupCategoryId = groupCategoryId;
     }
 
+    @CanvasField(postKey = "sis_group_id", array = false)
     public String getSisGroupId() {
         return sisGroupId;
     }
@@ -124,11 +133,21 @@ public class Group {
         this.sisImportId = sisImportId;
     }
 
+    @CanvasField(postKey = "storage_quota_mb", array = false)
     public Integer getStorageQuotaMb() {
         return storageQuotaMb;
     }
 
     public void setStorageQuotaMb(Integer storageQuotaMb) {
         this.storageQuotaMb = storageQuotaMb;
+    }
+
+    @CanvasField(postKey = "description", array = false)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
