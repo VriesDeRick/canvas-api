@@ -1,8 +1,12 @@
 package edu.ksu.canvas.model;
 
 import com.google.gson.annotations.SerializedName;
+import edu.ksu.canvas.annotation.CanvasField;
 
-public class GroupCategory {
+public class GroupCategory extends BaseCanvasModel {
+    public static final String SELF_SIGNUP_ENABLED = "enabled";
+    public static final String SELF_SIGNUP_RESTRICTED = "restricted";
+
     @SerializedName("id")
     private Integer groupCategoryId;
     private String name;
@@ -13,6 +17,7 @@ public class GroupCategory {
     private Integer accountId;
     private Integer courseId;
     private Integer groupLimit;
+    private Integer ceateGroupCount;
 
     public Integer getGroupCategoryId() {
         return groupCategoryId;
@@ -22,6 +27,7 @@ public class GroupCategory {
         this.groupCategoryId = groupCategoryId;
     }
 
+    @CanvasField(postKey = "name", array = false)
     public String getName() {
         return name;
     }
@@ -38,6 +44,7 @@ public class GroupCategory {
         this.role = role;
     }
 
+    @CanvasField(postKey = "self_signup", array = false)
     public String getSelfSignup() {
         return selfSignup;
     }
@@ -46,6 +53,7 @@ public class GroupCategory {
         this.selfSignup = selfSignup;
     }
 
+    @CanvasField(postKey = "auto_leader", array = false)
     public String getAutoLeader() {
         return autoLeader;
     }
@@ -78,11 +86,21 @@ public class GroupCategory {
         this.courseId = courseId;
     }
 
+    @CanvasField(postKey = "group_limit", array = false)
     public Integer getGroupLimit() {
         return groupLimit;
     }
 
     public void setGroupLimit(Integer groupLimit) {
         this.groupLimit = groupLimit;
+    }
+
+    @CanvasField(postKey = "create_group_count", array = false)
+    public Integer getCeateGroupCount() {
+        return ceateGroupCount;
+    }
+
+    public void setCeateGroupCount(Integer ceateGroupCount) {
+        this.ceateGroupCount = ceateGroupCount;
     }
 }

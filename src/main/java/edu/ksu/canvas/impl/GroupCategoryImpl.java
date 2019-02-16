@@ -4,15 +4,17 @@ import com.google.gson.reflect.TypeToken;
 import edu.ksu.canvas.interfaces.GroupCategoryReader;
 import edu.ksu.canvas.interfaces.GroupCategoryWriter;
 import edu.ksu.canvas.model.GroupCategory;
-import edu.ksu.canvas.model.GroupMembership;
+import edu.ksu.canvas.net.Response;
 import edu.ksu.canvas.net.RestClient;
 import edu.ksu.canvas.oauth.OauthToken;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class GroupCategoryImpl extends BaseImpl<GroupCategory, GroupCategoryReader, GroupCategoryWriter> implements GroupCategoryReader, GroupCategoryWriter{
     private static final Logger LOG = Logger.getLogger(GroupCategoryImpl.class);
@@ -39,6 +41,14 @@ public class GroupCategoryImpl extends BaseImpl<GroupCategory, GroupCategoryRead
         String url = buildCanvasUrl(String.format("courses/%s/group_categories", courseId), new HashMap<>());
         return getListFromCanvas(url);
     }
+
+    @Override
+    public Optional<GroupCategory> createGroupCategory(GroupCategory category, Integer courseId) throws IOException {
+        String url = buildCanvasUrl("courses/" + courseId + "/group_categories", Collections.emptyMap());
+        Response response = canvasMessenger.sendToCanvas(oauthToken, url, category.toPostMap(serializeNulls));
+        return responseParser.parseToObject(GroupCategory.class, response);
+    }
+
 
     @Override
     protected Type listType() {
