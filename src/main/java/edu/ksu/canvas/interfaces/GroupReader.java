@@ -11,4 +11,6 @@ public interface GroupReader extends CanvasReader<Group, GroupReader> {
     public List<Group> listCourseGroups(Integer courseId) throws IOException;
 
     public List<Group> listUserGroups() throws IOException;
+
+    public List<Group> listGroupsInCategory(Integer categoryId) throws IOException;
 }

@@ -16,6 +16,8 @@ public interface UserReader extends CanvasReader<User, UserReader> {
      */
     List<User> getUsersInCourse(GetUsersInCourseOptions options) throws IOException;
 
+    List<User> getUsersInGroup(Integer groupId) throws IOException;
+
     /**
      * Retrieve a specific user details from Canvas by user identifier
      * @param userIdentifier The object holding a user identifier value, for example:

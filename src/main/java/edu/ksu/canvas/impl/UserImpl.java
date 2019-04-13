@@ -68,6 +68,12 @@ public class UserImpl extends BaseImpl<User, UserReader, UserWriter> implements 
     }
 
     @Override
+    public List<User> getUsersInGroup(Integer groupId) throws IOException {
+        String url = buildCanvasUrl("groups/" + groupId + "/users", Collections.emptyMap());
+        return getListFromCanvas(url);
+    }
+
+    @Override
     public Optional<User> showUserDetails(String userIdentifier) throws IOException{
         LOG.debug("Retrieving user details");
         String url = buildCanvasUrl("users/" + userIdentifier, Collections.emptyMap());

@@ -48,8 +48,14 @@ public class GroupImpl extends BaseImpl<Group, GroupReader, GroupWriter> impleme
         LOG.info("Listing groups for course");
         String url = buildCanvasUrl("/users/self/groups", new HashMap<>());
         return getListFromCanvas(url);
-
     }
+
+    @Override
+    public List<Group> listGroupsInCategory(Integer categoryId) throws IOException {
+        String url = buildCanvasUrl("group_categories/" + categoryId.toString() + "/groups", new HashMap());
+        return getListFromCanvas(url);
+    }
+
 
     @Override
     protected Type listType() {
